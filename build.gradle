@@ -6,21 +6,31 @@
  * User Manual available at https://docs.gradle.org/6.2.2/userguide/tutorial_java_projects.html
  */
 
-plugins {
-    // Apply the java plugin to add support for Java
-    id 'java'
-
-    // Apply the application plugin to add support for building a CLI application.
-    id 'application'
+buildscript {
+    repositories {
+        maven { url = 'https://files.minecraftforge.net/maven' }
+        jcenter()
+        mavenCentral()
+    }
+    dependencies {
+        classpath group: 'net.minecraftforge.gradle', name: 'ForgeGradle', version: '3.+', changing: true
+    }
 }
+apply plugin: 'net.minecraftforge.gradle'
+apply plugin: 'maven'
+apply plugin: 'application'
 
-repositories {
-    // Use jcenter for resolving dependencies.
-    // You can declare any Maven/Ivy/file repository here.
-    jcenter()
+
+group = 'com.github.RavenJFelix'
+
+
+minecraft
+{
+	mappings channel: 'snapshot', version: '20190719-1.14.3'
 }
 
 dependencies {
+	minecraft 'net.minecraftforge:forge:1.15.2-31.1.0'
     // This dependency is used by the application.
     implementation 'com.google.guava:guava:28.1-jre'
 
@@ -28,7 +38,4 @@ dependencies {
     testImplementation 'junit:junit:4.12'
 }
 
-application {
-    // Define the main class for the application.
-    mainClassName = 'Herobrine.App'
-}
+mainClassName = "Herobrine.App"
