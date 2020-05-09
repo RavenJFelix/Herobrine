@@ -8,3 +8,6 @@
  */
 
 rootProject.name = 'Herobrine'
+
+include ':herobrinesoul'
+project(':herobrinesoul').projectDir = new File('./libs/HerobrineSoulAPI')
